@@ -66,3 +66,10 @@ export { default as CameraCalibrationParser } from 'Parser/CameraCalibrationPars
 export { default as BatchTableHierarchyExtensionParser } from 'Parser/BatchTableHierarchyExtensionParser';
 export { default as ShapefileParser } from 'Parser/ShapefileParser';
 export { enableDracoLoader, glTFLoader, legacyGLTFLoader } from 'Parser/B3dmParser';
+
+
+// Test photogrammetric camera
+export { default as OrientedImageMaterial } from 'three-photogrammetric-camera/materials/OrientedImageMaterial';
+export { default as PhotogrammetricCamera } from 'three-photogrammetric-camera/cameras/PhotogrammetricCamera';
+export { default as MicmacOrientationParser } from 'three-photogrammetric-camera/parsers/MicmacOrientationParser';
+export { default as FetchSource } from 'three-photogrammetric-camera/sources/FetchSource';
