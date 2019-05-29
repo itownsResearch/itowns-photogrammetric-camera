@@ -4,8 +4,8 @@ export { default as Coordinates } from 'Core/Geographic/Coordinates';
 export { default as CRS } from 'Core/Geographic/Crs';
 
 export { default as Ellipsoid, ellipsoidSizes } from 'Core/Math/Ellipsoid';
-export { default as GlobeView, GLOBE_VIEW_EVENTS, createGlobeLayer } from 'Core/Prefab/GlobeView';
-export { default as PlanarView, createPlanarLayer } from 'Core/Prefab/PlanarView';
+export { default as GlobeView, GLOBE_VIEW_EVENTS } from 'Core/Prefab/GlobeView';
+export { default as PlanarView } from 'Core/Prefab/PlanarView';
 export { default as Fetcher } from 'Provider/Fetcher';
 export { MAIN_LOOP_EVENTS } from 'Core/MainLoop';
 export { default as View } from 'Core/View';
@@ -67,9 +67,9 @@ export { default as BatchTableHierarchyExtensionParser } from 'Parser/BatchTable
 export { default as ShapefileParser } from 'Parser/ShapefileParser';
 export { enableDracoLoader, glTFLoader, legacyGLTFLoader } from 'Parser/B3dmParser';
 
-
 // Test photogrammetric camera
 export { default as OrientedImageMaterial } from 'three-photogrammetric-camera/materials/OrientedImageMaterial';
 export { default as PhotogrammetricCamera } from 'three-photogrammetric-camera/cameras/PhotogrammetricCamera';
 export { default as MicmacOrientationParser } from 'three-photogrammetric-camera/parsers/MicmacOrientationParser';
 export { default as FetchSource } from 'three-photogrammetric-camera/sources/FetchSource';
+

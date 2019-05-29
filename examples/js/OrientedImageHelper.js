@@ -1,10 +1,10 @@
-/* global itowns, document */
+/* global itowns */
 
 // set object position to the coordinate
 // set object ENH orientation: X to the east, Y (green) to the north, Z (blue) look to the sky.
 function placeObjectFromCoordinate(object, coord) {
     // set object position to the coordinate
-    coord.xyz(object.position);
+    coord.toVector3(object.position);
     // set ENH orientation, looking at the sky (Z axis), so Y axis look to the north..
     object.lookAt(coord.geodesicNormal.clone().add(object.position));
 }
@@ -94,7 +94,7 @@ function setupPictureFromCamera(camera, imageUrl, opacity, distance) {
 // BUT keep the geodesic normal as Up vector
 // eslint-disable-next-line no-unused-vars
 function setupViewCameraLookingAtObject(camera, coord, objectToLookAt) {
-    camera.position.copy(coord.xyz());
+    camera.position.copy(coord);
     camera.up.copy(coord.geodesicNormal);
     camera.lookAt(objectToLookAt.getWorldPosition());
 }
@@ -104,30 +104,12 @@ function setupViewCameraLookingAtObject(camera, coord, objectToLookAt) {
 function setupViewCameraDecomposing(view, camera) {
     var upWorld;
     var viewCamera = view.camera.camera3D;
+    camera.matrixWorld.decompose(viewCamera.position, viewCamera.quaternion, viewCamera.scale);
 
-    //camera.matrixWorld.decompose(viewCamera.position, viewCamera.quaternion, viewCamera.scale);
-    t = 0;
-    interpolateCam(view, camera);
-
-/*
     // setup up vector
     upWorld = camera.localToWorld(camera.up.clone());
     upWorld = viewCamera.position.clone().sub(upWorld);
     viewCamera.up.copy(upWorld);
-*/
-}
-
-var t = 0;
-var inc = 0.004;
-function interpolateCam(view, camera){
-    if(t < 1.){
-        var viewCamera = view.camera.camera3D;
-        viewCamera.quaternion.slerp( camera.quaternion, t += inc );
-        viewCamera.position.lerp( camera.position, t += inc );
-        viewCamera.scale.lerp( camera.scale, t += inc );
-        view.notifyChange();
-        requestAnimationFrame(function(){interpolateCam(view,camera);});
-    }
 }
 
 // add a camera helper to debug camera position..
@@ -139,18 +121,15 @@ function addCameraHelper(view, camera) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function setupPictureUI(menu, pictureInfos, plane, updateDistanceCallback, updateOpacityCallback, view, min, max) {
+function setupPictureUI(menu, pictureInfos, plane, updateDistanceCallback, view, min, max) {
     var orientedImageGUI = menu.gui.addFolder('Oriented Image');
     orientedImageGUI.add(pictureInfos, 'distance', min, max).name('Distance').onChange(function distanceChanged(value) {
         pictureInfos.distance = value;
-        updateDistanceCallback(value);
+        updateDistanceCallback();
         view.notifyChange();
     });
-
     orientedImageGUI.add(pictureInfos, 'opacity', 0, 1).name('Opacity').onChange(function opacityChanged(value) {
-        pictureInfos.opacity = value;
-        updateOpacityCallback(value);
+        plane.material.opacity = value;
         view.notifyChange();
     });
-
 }

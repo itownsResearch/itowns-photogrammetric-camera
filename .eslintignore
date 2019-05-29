@@ -1,3 +1,5 @@
 examples/js/GUI/dat.gui
 src/ThreeExtended/*
+src/three-photogrammetric-camera/*
+src/Main.js
 examples/libs/*
