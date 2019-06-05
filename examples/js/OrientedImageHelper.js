@@ -139,8 +139,9 @@ function addCameraHelper(view, camera) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function setupPictureUI(menu, pictureInfos, plane, updateDistanceCallback, updateOpacityCallback, view, min, max) {
+function setupPictureUI(menu, pictureInfos, plane, updateDistanceCallback, updateOpacityCallback, updateFOVCallback, view, min, max) {
     var orientedImageGUI = menu.gui.addFolder('Oriented Image');
+
     orientedImageGUI.add(pictureInfos, 'distance', min, max).name('Distance').onChange(function distanceChanged(value) {
         pictureInfos.distance = value;
         updateDistanceCallback(value);
@@ -150,6 +151,13 @@ function setupPictureUI(menu, pictureInfos, plane, updateDistanceCallback, updat
     orientedImageGUI.add(pictureInfos, 'opacity', 0, 1).name('Opacity').onChange(function opacityChanged(value) {
         pictureInfos.opacity = value;
         updateOpacityCallback(value);
+        view.notifyChange();
+    });
+    
+    var pF = {zoom:1.};
+    orientedImageGUI.add( pF, 'zoom', 0.01, 2.).name('Zoom').onChange(function fovChanged(value) {
+        //pictureInfos.opacity = value;
+        updateFOVCallback(value);
         view.notifyChange();
     });
 
