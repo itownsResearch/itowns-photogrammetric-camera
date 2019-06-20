@@ -102,19 +102,10 @@ function setupViewCameraLookingAtObject(camera, coord, objectToLookAt) {
 // set camera settings to view.camera, even the up vector !
 // eslint-disable-next-line no-unused-vars
 function setupViewCameraDecomposing(view, camera) {
-    var upWorld;
-    var viewCamera = view.camera.camera3D;
 
     //camera.matrixWorld.decompose(viewCamera.position, viewCamera.quaternion, viewCamera.scale);
     t = 0;
     interpolateCam(view, camera);
-
-/*
-    // setup up vector
-    upWorld = camera.localToWorld(camera.up.clone());
-    upWorld = viewCamera.position.clone().sub(upWorld);
-    viewCamera.up.copy(upWorld);
-*/
 }
 
 var t = 0;

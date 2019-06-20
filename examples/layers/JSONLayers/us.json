@@ -1,0 +1,13 @@
+{
+    "id": "USGS",
+    "source": {
+        "name": "USGS",
+	    "networkOptions": { "crossOrigin" : "anonymous" },
+        "format": "image/png",
+        "url": "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/WMTS/tile/1.0.0/USGSImageryOnly/default/default028mm/${z}/${y}/${x}",
+    	"attribution": {
+    		"name":"USGS"
+    	},
+        "tileMatrixSet": "PM"
+    }
+}
