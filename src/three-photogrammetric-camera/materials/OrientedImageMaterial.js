@@ -152,9 +152,8 @@ ShaderChunk.color_fragment = `${ShaderChunk.color_fragment}
           float fogFactorX = 1. / exp(pow(d * 5., 2.));
           diffuseColor.rgb = mix(diffuseColor.rgb, vec3( 1.) , foggy * ( fogFactorX )); // mix(diffuseColor.rgb, vec3( 1.) , foggy * (1. - fogFactor)); 
         }
-
         
-
+        if(uvw.x>1. || uvw.y>1. || uvw.x<0. || uvw.y<0.) diffuseColor.a = 0.;
 
 
 #endif

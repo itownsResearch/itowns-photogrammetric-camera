@@ -59,23 +59,30 @@ function updateBackground(layer) {
         layer.background.position.copy(layer.currentPano.position);
         layer.background.updateMatrixWorld();
         layer.background.material = layer.material || layer.background.material;
+        // Orient the box approximately
+        layer.background.lookAt(0, 0, 0);
+        layer.background.updateMatrixWorld();
     }
 }
 
 function createBackground(radius) {
     if (!radius || radius <= 0) { return undefined; }
-    var geometry = new THREE.SphereGeometry(radius, 32, 32);
+    var geometry = new THREE.BoxGeometry(radius, radius, radius);
+    for (var i = 0; i < geometry.vertices.length; ++i) {
+        geometry.vertices[i].z -= radius / 2 - 3;  // Translate so we can use for ground
+    }
+    console.log(geometry);
     var material = new THREE.MeshPhongMaterial({
         color: 0x7777ff,
-        side: THREE.DoubleSide,
+        side: THREE.FrontSide,
         transparent: true,
         opacity: 0.5,
         wireframe: true,
     });
-    var sphere = new THREE.Mesh(geometry, material);
-    sphere.visible = true;
-    sphere.name = 'OrientedImageBackground';
-    return sphere;
+    var box = new THREE.Mesh(geometry, material);
+    box.visible = true;
+    box.name = 'OrientedImageBackground';
+    return box;
 }
 
 /**

@@ -109,7 +109,7 @@ function setupViewCameraDecomposing(view, camera) {
 }
 
 var t = 0;
-var inc = 0.004;
+var inc = 0.002;
 function interpolateCam(view, camera){
     if(t < 1.){
         var viewCamera = view.camera.camera3D;
