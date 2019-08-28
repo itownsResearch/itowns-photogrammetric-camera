@@ -71,5 +71,6 @@ export { enableDracoLoader, glTFLoader, legacyGLTFLoader } from 'Parser/B3dmPars
 export { default as OrientedImageMaterial } from 'three-photogrammetric-camera/materials/OrientedImageMaterial';
 export { default as PhotogrammetricCamera } from 'three-photogrammetric-camera/cameras/PhotogrammetricCamera';
 export { default as MicmacOrientationParser } from 'three-photogrammetric-camera/parsers/MicmacOrientationParser';
+export { default as RadialDistortion } from 'three-photogrammetric-camera/cameras/distortions/RadialDistortion';
 export { default as FetchSource } from 'three-photogrammetric-camera/sources/FetchSource';
 

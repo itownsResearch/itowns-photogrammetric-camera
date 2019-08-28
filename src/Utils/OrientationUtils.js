@@ -77,6 +77,9 @@ export default {
      * @return {THREE.Quaternion} Quaternion representing the rotation
      */
     localQuaternionFromAttitude(attitude, target = new THREE.Quaternion()) {
+        if (attitude.quaternion) {
+            return target.copy(attitude.quaternion);
+        }
         if ((attitude.roll !== undefined) || (attitude.pitch !== undefined) || (attitude.heading !== undefined)) {
             return quaternionFromRollPitchHeading(attitude.roll, attitude.pitch, attitude.heading, target);
         }
