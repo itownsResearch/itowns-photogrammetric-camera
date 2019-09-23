@@ -4,10 +4,10 @@ const URL = window.URL || window.webkitURL;
 function decode(response, type) {
     if (!response.ok) {
         const error = new Error(`Error loading ${response.url}: status ${response.status}`);
-        error.reponse = reponse;
+        error.response = response;
         throw error;
     }
-    switch (type) {
+    switch(type) {
         case 'text': return response.text();
         case 'arrayBuffer': return response.arrayBuffer();
         case 'dataURL': return response.blob().then(URL.createObjectURL);
@@ -17,7 +17,7 @@ function decode(response, type) {
 
 /** @module FetchSource */
 class FetchSource {
-    /** create a source with a read function that fetches and decodes a file
+  /** create a source with a read function that fetches and decodes a file
    * @constructor
    * @param {Object} options.fetchOptions - fetching options (see standard js fetch function)
    * @param {string} options.path - path prefix for relative intrinsic files (default: '')
@@ -33,12 +33,13 @@ class FetchSource {
     }
 
     open(url, type) {
-        return this.fetch(this.path + url, this.fetchOptions)
+        if(!url.startsWith('http')) url = this.path + url; // todo: better handling of absolute and relative urls
+        return this.fetch(url, this.fetchOptions)
             .then(response => this.decode(response, type));
     }
 
     close(url, type) {
-        if (type === 'dataURL') { URL.revokeObjectURL(url); }
+        if (type === 'dataURL') URL.revokeObjectURL(url);
     }
 }
 
