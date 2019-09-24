@@ -71,7 +71,6 @@ function createBackground(radius) {
     for (var i = 0; i < geometry.vertices.length; ++i) {
         geometry.vertices[i].z -= radius / 2 - 3;  // Translate so we can use for ground
     }
-    console.log(geometry);
     var material = new THREE.MeshPhongMaterial({
         color: 0x7777ff,
         side: THREE.FrontSide,
